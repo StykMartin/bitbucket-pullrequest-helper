@@ -1,0 +1,28 @@
+name: Atlas Package
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+env:
+  COMMIT_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+  BRANCH: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.event.pull_request.head.ref) || github.ref }}
+
+jobs:
+  atlas-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Java JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: 8
+      - name: Install Atlassian SDK
+        uses: rodrigo-nogues/github-action-install-atlassian-sdk@v1
+      - name: Atlas Package
+        run: |
+          atlas-package
