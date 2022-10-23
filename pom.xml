@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -8,11 +9,10 @@
     <packaging>atlassian-plugin</packaging>
 
     <name>marigold</name>
-    <description>This is the sk.mstyk:marigold plugin for Atlassian Bitbucket Server.</description>
-
+    <description>A Plugin for Atlassian Bitbucket to improve the developer experience during pull requests.</description>
     <organization>
-        <name>Example Company</name>
-        <url>http://www.example.com/</url>
+        <name>Martin Styk</name>
+        <url>https://github.com/StykMartin/</url>
     </organization>
 
     <properties>
@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <amps.version>8.1.2</amps.version>
-        <bitbucket.version>5.16.0</bitbucket.version>
+        <bitbucket.version>7.21.0</bitbucket.version>
         <bitbucket.data.version>${bitbucket.version}</bitbucket.data.version>
 
         <!-- This property ensures consistency between the key in atlassian-plugin.xml and the OSGi bundle's key. -->
@@ -55,7 +55,6 @@
             <artifactId>bitbucket-spi</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
@@ -73,7 +72,6 @@
             <artifactId>sal-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -117,6 +115,7 @@
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <enableQuickReload>true</enableQuickReload>
                     <products>
                         <product>
                             <id>bitbucket</id>
@@ -127,19 +126,10 @@
                     </products>
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
-
                         <!-- Add package to export here -->
-                        <Export-Package>
-                            sk.mstyk.api,
-                        </Export-Package>
-
+                        <Export-Package>sk.mstyk.*,</Export-Package>
                         <!-- Add package import here -->
-                        <Import-Package>
-                            org.springframework.osgi.*;resolution:="optional",
-                            org.eclipse.gemini.blueprint.*;resolution:="optional",
-                            *
-                        </Import-Package>
-
+                        <Import-Package>org.springframework.osgi.*;resolution:="optional", org.eclipse.gemini.blueprint.*;resolution:="optional", *</Import-Package>
                         <!-- Ensure plugin is Spring powered -->
                         <Spring-Context>*</Spring-Context>
                     </instructions>
