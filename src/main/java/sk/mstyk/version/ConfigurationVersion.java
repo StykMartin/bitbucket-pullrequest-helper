@@ -6,7 +6,7 @@ import java.util.Objects;
 public enum ConfigurationVersion {
     VERSION_1_0("1.0");
 
-    private String version;
+    private final String version;
 
     ConfigurationVersion(String version) {
         this.version = version;
