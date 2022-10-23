@@ -11,10 +11,10 @@ may add/remove files from the scope.
 ## Configuration
 Marigold has no global configuration and setup is done on the repository level.
 
-Bitbucket administrators should perform these tasks in order to enable Jaskier:
+Bitbucket administrators should perform these tasks in order to enable Marigold:
 
-- Enable Jaskier in repository settings
-- Store jaskier.yaml in root folder
+- Enable Marigold in repository settings
+- Store marigold.yaml in root folder
 
 This is what marigold.yaml should look like:
 ```yaml
